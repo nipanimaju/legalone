@@ -1,14 +1,14 @@
 .App {
   width: 100vw;
-  height: 100vh;
+  height: auto;
 }
 .App, .main {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 .main {
+  flex-direction: column;
   width: 75%;
   height: auto;
   background-color: #eb5867;
