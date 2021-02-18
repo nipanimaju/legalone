@@ -33,10 +33,11 @@ let homePath = (req, res) => {
   });
   for (const [key, value] of Object.entries(data)) {
     let localData = {};
+    let agentId = value[value.length - 1].agentIdentifier;
     localData.number = value[value.length - 1].number;
     localData.numberOfCalls = value.length;
     localData.lastCall = value[value.length - 1].dateTime;
-    let agentId = value[value.length - 1].agentIdentifier;
+    localData.agentId = agentId;
     agents.forEach((item) => {
       if (agentId === item.identifier) {
         localData.agentName = `${item.firstName} ${item.lastName}`;
