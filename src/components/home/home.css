@@ -18,12 +18,22 @@ table {
     background-color: #484018;
   }
   .modal {
+    position: absolute;
+    top: 75px;
+    right: 50;
+    border-radius: 25px;
+    border: #ff6f82 solid 2px;
+    width: 50%;
+    height: auto;
+    background-color: whitesmoke;
+    z-index: 1;
     text-align: center;
   }
-  .closeButton {
+  .modalButton {
     background-color: #ff6f82;
+    border-radius: 5px;
     color: #f3f3f3;
-    width: 25%;
-    border-radius: 15px;
+    margin-bottom: 20px;
     font-size: medium;
   }
+  

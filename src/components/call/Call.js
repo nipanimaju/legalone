@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import {ChartComponent} from 'bar-chart-simple'
 import "../home/home.css";
 
 const link = `http://localhost:3001/call/`;
@@ -20,7 +19,7 @@ const link = `http://localhost:3001/call/`;
         }
     return (
      isLoading ? null : ( <>  
-          <table>
+      {callData == "" ? <p>cant find number</p> :  <table>
             <thead>
               <tr>
                 <th>Agent Name</th>
@@ -37,7 +36,7 @@ const link = `http://localhost:3001/call/`;
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table>}
       </>)
     );
 };

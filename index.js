@@ -13,6 +13,7 @@ let agents = JSON.parse(agentsRaw);
 let logs = JSON.parse(logsRaw);
 let resolution = JSON.parse(resolutionRaw);
 
+//enable cors for binding all localhost
 app.use(cors());
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -21,7 +22,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-let homePath = (req, res) => {
+let getHomePathData = (req, res) => {
   let homePathData = [];
   let data = {};
   logs.forEach((item) => {
@@ -48,7 +49,7 @@ let homePath = (req, res) => {
   return res.json(homePathData);
 };
 
-let agentIdPath = async (req, res) => {
+let getAgentIdPathData = async (req, res) => {
   const id = await req.params.id;
   const localData = [];
   logs.forEach((item) => {
@@ -63,7 +64,7 @@ let agentIdPath = async (req, res) => {
   return res.json(localData);
 };
 
-let callNumberPath = async (req, res) => {
+let getCallNumberPathData = async (req, res) => {
   const number = req.params.number;
   const localData = [];
   logs.forEach((item) => {
@@ -80,13 +81,13 @@ let callNumberPath = async (req, res) => {
   return res.json(localData);
 };
 
-app.get("/", homePath);
+app.get("/", getHomePathData);
 app.get("/agent", (req, res) => {
   res.json(agents);
   res.end();
 });
-app.get("/agent/:id", agentIdPath);
-app.get("/call/:number", callNumberPath);
+app.get("/agent/:id", getAgentIdPathData);
+app.get("/call/:number", getCallNumberPathData);
 
 app.listen(process.env.PORT || 3001, '0.0.0.0', function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
