@@ -2,18 +2,16 @@ import React, { useEffect, useState } from "react";
 import { ChartComponent } from "bar-chart-simple";
 import AgentLog from "./agentLog/AgentLog";
 import "./home.css";
-import { Modal, Button } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+import Modal from "react-awesome-modal";
 
 const link = `http://localhost:3001/`;
 
 const Home = () => {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const [homeData, setHomeData] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [agentId, setAgentId] = useState("");
+  const [visible, setVisible] = useState(false);
+
   useEffect(() => {
     getData();
   }, []);
@@ -38,21 +36,17 @@ const Home = () => {
     }
     return dataArr;
   };
+
+  let openModal = () => {
+    setVisible(true);
+  };
+
+  let closeModal = () => {
+    setVisible(false);
+  };
+
   return isLoading ? null : (
     <>
-      <Modal show={show} onHide={handleClose} dialogClassName="modal-100w">
-        <Modal.Header closeButton>
-          <Modal.Title></Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <AgentLog agentId={agentId} />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
       <table>
         <thead>
           <tr>
@@ -69,7 +63,7 @@ const Home = () => {
               <td
                 onClick={() => {
                   setAgentId(item.agentId);
-                  handleShow();
+                  openModal();
                 }}
               >
                 {item.agentName} / {item.lastCall.slice(11, -8)}
@@ -78,6 +72,19 @@ const Home = () => {
           ))}
         </tbody>
       </table>
+      <Modal
+        visible={visible}
+        width="350"
+        height="500"
+        effect="fadeInUp"
+        onClickAway={() => closeModal()}
+      >
+        <div className="modal">
+            <AgentLog agentId={agentId} />
+          
+          <button className="closeButton" onClick={() => closeModal()}>close</button>
+        </div>
+      </Modal>
       <ChartComponent data={data()} chart_type="bar_chart" />
     </>
   );

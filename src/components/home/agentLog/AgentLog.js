@@ -22,9 +22,9 @@ const AgentLog = (props) => {
       {agentData.map((item, i) => {
         if (item.identifier === props.agentId) {
           return (
-            <div className="agentLog" key={i}>
+            <div className="agentLog" key={i} >
               <div >
-                <img src={item.photo} alt="agent photo" />
+                <img src={item.photo} alt="agent photo" style={{marginTop: "10px"}}/>
               </div>
               <div style={{margin: "10px"}}>
                 <p style={{textAlign: "center"}}>

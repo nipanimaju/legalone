@@ -3,9 +3,8 @@ table {
     width: 80%;
     margin: 10% 0 10% 0;
     color: #f3f3f3;
-    
   }
-  
+
   td, th {
     border: 1px solid #ff6f82;
     text-align: left;
@@ -17,4 +16,14 @@ table {
   }
   tr:nth-child(odd) {
     background-color: #484018;
+  }
+  .modal {
+    text-align: center;
+  }
+  .closeButton {
+    background-color: #ff6f82;
+    color: #f3f3f3;
+    width: 25%;
+    border-radius: 15px;
+    font-size: medium;
   }
